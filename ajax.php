@@ -700,7 +700,7 @@ $function = $_POST['function'];
             echo "You can't assign this Item";
             
         }else{
-            $query = "INSERT INTO tbl_records (date_created, asset_id, emp_id, location, emp_fname, emp_lname, emp_sbu, emp_position, asset_tag, asset_name, asset_descriptions, asset_type_of, asset_serial_no, asset_status, asset_remarks, record_status) VALUES ('$emp_date_assigned_record', '$asset_id', '$emp_id_record', '$location_record', '$firstname_record', '$lastname_record', '$emp_sbu_record', '$position_record', '$assign_asset_tag_record', '$assign_asset_name_record', '$assign_description_record', '$assign_type_record', '$assign_serial_record', 'In use', '$assign_remarks_record', '0')";
+            $query = "INSERT INTO tbl_records (date_created, asset_id, emp_id, location, emp_fname, emp_lname, emp_sbu, emp_position, asset_tag, asset_name, asset_descriptions, asset_type_of, asset_serial_no, asset_status, asset_remarks, record_status, acc_status) VALUES ('$emp_date_assigned_record', '$asset_id', '$emp_id_record', '$location_record', '$firstname_record', '$lastname_record', '$emp_sbu_record', '$position_record', '$assign_asset_tag_record', '$assign_asset_name_record', '$assign_description_record', '$assign_type_record', '$assign_serial_record', 'In use', '$assign_remarks_record', '0', '0')";
         
         
         if(mysqli_query($conn, $query)){
@@ -775,26 +775,27 @@ $function = $_POST['function'];
         
         include 'dbcon.php';
         
-        $query = "INSERT INTO tbl_return (id, return_date, record_id, collected_by, asset_remarks, note) VALUES ('', NOW(), '$record_id', '$collectedby', '$asset_remarks', '$returnnote')";
-        if(mysqli_query($conn, $query)){
-            echo 'Return Success';   
+        $query = "INSERT INTO tbl_return (return_date, record_id, collected_by, asset_remarks, note) VALUES (NOW(), '$record_id', '$collectedby', '$asset_remarks', '$returnnote')";
+        if(mysqli_query($conn, $query))
+        {
+            
+            echo 'Return Success'; 
+            
             $query = "UPDATE tbl_records rec
-                            LEFT JOIN tbl_assets ass
-                            ON rec.asset_id = ass.id
-                            SET
-                                rec.record_status = 1,
-                                rec.asset_status = '$asset_remarks',
-                                ass.`status` = '$asset_remarks'
-                            WHERE rec.id = $record_id";
-            if(mysqli_query($conn, $query)){
-                echo 'Record Update';
-               
+            LEFT JOIN tbl_assets ass ON rec.asset_id = ass.id
+            SET rec.record_status = 1, rec.asset_status = '$asset_remarks', ass.`status` = '$asset_remarks'
+            WHERE rec.id = '$record_id'";
+            if(mysqli_query($conn, $query))
+            {
+
             }
-        }else{
+        }
+        else
+        {
             echo $conn->error;
         }
-    // closing connection
-    mysqli_close($conn);
+        // closing connection
+        mysqli_close($conn);
     }
                 
     function return_lists(){
@@ -956,6 +957,7 @@ $function = $_POST['function'];
         $_SESSION['pnpfname'] = $pnpfullname;
         $_SESSION['issuer'] = $f_issuer;
         $_SESSION['asset_SBU'] = $asset_sbu;
+        $notApp = "NA";
         
         $query = "SELECT emp_id, acc_status FROM tbl_records WHERE emp_id = '$emp_id' AND acc_status = 0";
         $result = mysqli_query($conn, $query);
@@ -966,17 +968,17 @@ $function = $_POST['function'];
                 $_SESSION['employee_id'] = $row['emp_id'];
                 $accstatus = $row['acc_status'];
             }
+            $query = "INSERT INTO tbl_accountability (record_id, date_created, user_id) VALUES ($notApp, NOW(), '$userid')";
+            if(mysqli_query($conn, $query))
+            {
+                $query = "SELECT id FROM tbl_accountability ORDER BY id DESC";
+                $result = mysqli_query($conn, $query);
+                $row = mysqli_fetch_array($result);
+                $acc = $row[0];
+                $accid = str_pad($acc, 4, 0, STR_PAD_LEFT);
+            }
         }
-        $query = "INSERT INTO tbl_accountability (date_created, user_id) VALUES (NOW(), '$userid')";
-        if(mysqli_query($conn, $query))
-        {
-            $query = "SELECT id FROM tbl_accountability ORDER BY id DESC";
-            $result = mysqli_query($conn, $query);
-            $row = mysqli_fetch_array($result);
-            $acc = $row[0];
-            $accid = str_pad($acc, 4, 0, STR_PAD_LEFT);
-        }
-        
+          
         $formid = $asset_sbu."-".$year."-".$accid;
         $_SESSION['form_id'] = $formid;
         $array[] = array(
@@ -1011,7 +1013,7 @@ $function = $_POST['function'];
                 $record_id = $row[0];
                 }
                 
-                $query = "INSERT INTO tbl_accountability (record_id, date_created, user_id) VALUES ('$record_id', NOW(), $userid)";
+                $query = "INSERT INTO tbl_accountability (record_id, date_created, user_id) VALUES ('$record_id', NOW(), '$userid')";
                 if(mysqli_query($conn, $query))
                 {
                     $query = "SELECT id FROM tbl_accountability ORDER BY id DESC";

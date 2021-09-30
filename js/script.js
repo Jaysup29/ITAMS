@@ -594,6 +594,7 @@ function return_asset_trigger(id) {
         }
     });
     
+    alert(data);
     setTimeout(function(){
         $('#returnconfirmationmessage').modal('hide');
         record_list();
@@ -824,19 +825,16 @@ function totaldevices(){
     });
 }
 
-function totaldevicespheripherals(){
-    
+function sumOfMainDevices(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
         type: 'POST',
         url: 'ajax.php',
-        data: { function: 'total_devices_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
+        data: { function: 'MainDevices', selected_sbu:selected_sbu},
+        dataType: 'json',
         success: function(data){
-
-            $("#totaldevicespheripherals").empty();
-            $("#totaldevicespheripherals").append(data);
+            console.log(data);
         }
     });
 }
@@ -924,6 +922,23 @@ function spare_devices_avail_pheripherals(){
             
             $('#spare_devices_avail_pheripherals').empty();
             $('#spare_devices_avail_pheripherals').append(data);
+        }
+    });
+}
+
+function totaldevicespheripherals(){
+    
+    var selected_sbu = $("#select_sbu").val();
+    
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: { function: 'total_devices_pheripherals', selected_sbu:selected_sbu},
+        dataType: 'text',
+        success: function(data){
+
+            $("#totaldevicespheripherals").empty();
+            $("#totaldevicespheripherals").append(data);
         }
     });
 }
