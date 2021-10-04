@@ -176,39 +176,14 @@ $function = $_POST['function'];
         generate_single_acf($record_id);
     }
 
-    else if($function == 'working_assets'){
+    else if($function == 'MainDevices'){
         $selected_sbu = $_POST['selected_sbu'];
-        working_assets($selected_sbu);
+        MainDevices($selected_sbu);
     }
 
-    else if($function == 'missing_assets'){
+    else if($function == 'PheripheralDevices'){
         $selected_sbu = $_POST['selected_sbu'];
-        missing_assets($selected_sbu);
-    }
-
-    else if($function == 'dispose_assets'){
-        $selected_sbu = $_POST['selected_sbu'];
-        dispose_assets($selected_sbu);
-    }
-
-    else if($function == 'damageordefect_assets'){
-        $selected_sbu = $_POST['selected_sbu'];
-        damageordefect_assets($selected_sbu);
-    }
-
-    else if($function == 'sparedevicesavailable_assets'){
-        $selected_sbu = $_POST['selected_sbu'];
-        sparedevicesavailable_assets($selected_sbu);
-    }
-
-    else if($function == 'total_devices'){
-        $selected_sbu = $_POST['selected_sbu'];
-        total_devices($selected_sbu);
-    }
-
-    else if($function == 'total_devices_pheripherals'){
-        $selected_sbu = $_POST['selected_sbu'];
-        total_devices_pheripherals($selected_sbu);
+        PheripheralDevices($selected_sbu);
     }
     
     else if($function == 'dashboard_table_assets'){
@@ -219,31 +194,6 @@ $function = $_POST['function'];
     else if($function == 'dashboard_assetsstatus_pheripherals'){
         $selected_sbu = $_POST['selected_sbu'];
         dashboard_assetsstatus_pheripherals($selected_sbu);
-    }
-    
-    else if($function == 'working_pheripherals'){
-        $selected_sbu = $_POST['selected_sbu'];
-        working_pheripherals($selected_sbu);
-    }
-
-    else if($function == 'missing_pheripherals'){
-        $selected_sbu = $_POST['selected_sbu'];
-        missing_pheripherals($selected_sbu);
-    }
-
-    else if($function == 'dispose_pheripherals'){
-        $selected_sbu = $_POST['selected_sbu'];
-        dispose_pheripherals($selected_sbu);
-    }
-
-    else if($function == 'damage_or_defective_pheripherals'){
-        $selected_sbu = $_POST['selected_sbu'];
-        damage_or_defective_pheripherals($selected_sbu);
-    }
-
-    else if($function == 'spare_devices_avail_pheripherals'){
-        $selected_sbu = $_POST['selected_sbu'];
-        spare_devices_avail_pheripherals($selected_sbu);
     }
 
     else if($function == 'getdatatochart'){
@@ -785,10 +735,8 @@ $function = $_POST['function'];
             LEFT JOIN tbl_assets ass ON rec.asset_id = ass.id
             SET rec.record_status = 1, rec.asset_status = '$asset_remarks', ass.`status` = '$asset_remarks'
             WHERE rec.id = '$record_id'";
-            if(mysqli_query($conn, $query))
-            {
-
-            }
+            mysqli_query($conn, $query);
+            
         }
         else
         {
@@ -957,7 +905,7 @@ $function = $_POST['function'];
         $_SESSION['pnpfname'] = $pnpfullname;
         $_SESSION['issuer'] = $f_issuer;
         $_SESSION['asset_SBU'] = $asset_sbu;
-        $notApp = "NA";
+        $notApp = 'NA';
         
         $query = "SELECT emp_id, acc_status FROM tbl_records WHERE emp_id = '$emp_id' AND acc_status = 0";
         $result = mysqli_query($conn, $query);
@@ -968,7 +916,7 @@ $function = $_POST['function'];
                 $_SESSION['employee_id'] = $row['emp_id'];
                 $accstatus = $row['acc_status'];
             }
-            $query = "INSERT INTO tbl_accountability (record_id, date_created, user_id) VALUES ($notApp, NOW(), '$userid')";
+            $query = "INSERT INTO tbl_accountability (record_id, date_created, user_id) VALUES ('$notApp', NOW(), '$userid')";
             if(mysqli_query($conn, $query))
             {
                 $query = "SELECT id FROM tbl_accountability ORDER BY id DESC";
@@ -1042,235 +990,20 @@ $function = $_POST['function'];
     }
 
 //DASHBOARD
-    function working_assets($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` IN ('Available', 'In use')
-                        AND item.type_of_item = 0
-                        ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-    mysqli_close($conn);
-    }
-
-    function missing_assets($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Missing'
-                        AND item.type_of_item = 0
-                          ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-    mysqli_close($conn);
-    }
-    
-    function dispose_assets($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Disposed'
-                        AND item.type_of_item = 0
-                          ";
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-    mysqli_close($conn);
-    }
-
-    function damageordefect_assets($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Defective'
-                        AND item.type_of_item = 0
-                          ";
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-    mysqli_close($conn);
-    }
-
-    function sparedevicesavailable_assets($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Spare of Device Available'
-                        AND item.type_of_item = 0
-                        ";
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-    mysqli_close($conn);
-    }
-
-    function total_devices($selected_sbu){
+    function MainDevices($selected_sbu){
         include 'dbcon.php';
         
-        $query = "SELECT
-                    COUNT(ass.`status`)
-                FROM tbl_assets ass
-                LEFT JOIN tbl_item item ON ass.type_of = item.id
-                WHERE item.type_of_item = 0
-                ";
+        $query = "SELECT DISTINCT(COUNT(CASE WHEN ass.`status` IN('Available','In use') then 1 ELSE NULL END)),
+        COUNT(CASE WHEN ass.`status` = 'Missing' then 1 ELSE NULL END),
+        COUNT(CASE WHEN ass.`status` = 'Disposed' then 1 ELSE NULL END),
+        COUNT(CASE WHEN ass.`status` = 'Defective' then 1 ELSE NULL END),
+        COUNT(CASE WHEN ass.`status` = 'Spare of Device Available' then 1 ELSE NULL END),
+        COUNT(ass.`status`)
+        FROM tbl_assets ass
+        LEFT JOIN tbl_item item ON ass.type_of = item.id
+        WHERE item.type_of_item = 0
+        ";
+        
         if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
             
         }
@@ -1296,25 +1029,42 @@ $function = $_POST['function'];
             $query .="AND ass.sbu = 'SUKIKO'";
         }
         $result = mysqli_query($conn, $query);
-        while($row = mysqli_fetch_array($result)){
-            $total = $row[0];
+        if(mysqli_num_rows($result) > 0)
+        {
+            while($row = mysqli_fetch_array($result))
+            {
+                $arr[] = array(
+                    'Working' => $row[0],
+                    'Missing' => $row[1],
+                    'Disposed' => $row[2],
+                    'Defective' => $row[3],
+                    'Spare' => $row[4],
+                    'Total' => $row[5]
+                );
+            }
+            echo json_encode($arr);
+            exit();
         }
-        echo '<p>'.$total.'<p>';
-    
+        
     // closing connection
     mysqli_close($conn);
-       
+        
     }
 
-    function total_devices_pheripherals($selected_sbu){
+    function PheripheralDevices($selected_sbu){
         include 'dbcon.php';
         
-        $query = "SELECT
-                    COUNT(ass.`status`)
-                FROM tbl_assets ass
-                LEFT JOIN tbl_item item ON ass.type_of = item.id
-                WHERE item.type_of_item = 1
-                ";
+        $query = "SELECT DISTINCT(COUNT(CASE WHEN ass.`status` IN('Available','In use') then 1 ELSE NULL END)),
+        COUNT(CASE WHEN ass.`status` = 'Missing' then 1 ELSE NULL END),
+        COUNT(CASE WHEN ass.`status` = 'Disposed' then 1 ELSE NULL END),
+        COUNT(CASE WHEN ass.`status` = 'Defective' then 1 ELSE NULL END),
+        COUNT(CASE WHEN ass.`status` = 'Spare of Device Available' then 1 ELSE NULL END),
+        COUNT(ass.`status`)
+        FROM tbl_assets ass
+        LEFT JOIN tbl_item item ON ass.type_of = item.id
+        WHERE item.type_of_item = 1
+        ";
+        
         if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
             
         }
@@ -1340,15 +1090,28 @@ $function = $_POST['function'];
             $query .="AND ass.sbu = 'SUKIKO'";
         }
         $result = mysqli_query($conn, $query);
-        while($row = mysqli_fetch_array($result)){
-            $total = $row[0];
+        if(mysqli_num_rows($result) > 0)
+        {
+            while($row = mysqli_fetch_array($result))
+            {
+                $arr[] = array(
+                    'Working' => $row[0],
+                    'Missing' => $row[1],
+                    'Disposed' => $row[2],
+                    'Defective' => $row[3],
+                    'Spare' => $row[4],
+                    'Total' => $row[5]
+                );
+            }
+            echo json_encode($arr);
+            exit();
         }
-        echo '<p>'.$total.'<p>';
         
     // closing connection
     mysqli_close($conn);
+        
     }
- 
+
 //table assets status
     function dashboard_table_assets($selected_sbu){
         
@@ -2099,231 +1862,6 @@ $function = $_POST['function'];
         // closing connection
         mysqli_close($conn);
         
-    }
-
-    function working_pheripherals($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` IN ('Available', 'In use')
-                        AND item.type_of_item = 1
-                        ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-        mysqli_close($conn);
-    }
-
-    function missing_pheripherals($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Missing'
-                        AND item.type_of_item = 1
-                          ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-        mysqli_close($conn);
-    }
-
-    function dispose_pheripherals($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Disposed'
-                        AND item.type_of_item = 1
-                          ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-        mysqli_close($conn);
-    }
-
-    function damage_or_defective_pheripherals($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Defective'
-                        AND item.type_of_item = 1
-                          ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-        mysqli_close($conn);
-    }
-
-    function spare_devices_avail_pheripherals($selected_sbu){
-        
-        include 'dbcon.php';
-    
-                $query = "SELECT
-                            COUNT(ass.`status`)
-                        FROM tbl_assets ass
-                        LEFT JOIN tbl_item item ON ass.type_of = item.id
-                        WHERE ass.`status` = 'Spare of Device Available'
-                        AND item.type_of_item = 1
-                          ";
-        
-                if(($selected_sbu == null)||($selected_sbu == "")||($selected_sbu == 'ALL')){
-                    
-                }
-                else if($selected_sbu == 'PNKC'){
-                    $query .="AND ass.sbu = 'PNKC'";
-                }
-                else if($selected_sbu == 'GILI'){
-                    $query .="AND ass.sbu = 'GILI'";
-                }
-                else if($selected_sbu == 'EXERGY'){
-                    $query .="AND ass.sbu = 'EXERGY'";
-                }
-                else if($selected_sbu == 'MANNVITS'){
-                    $query .="AND ass.sbu = 'MANNVITS'";
-                }
-                else if($selected_sbu == 'CLDI'){
-                    $query .="AND ass.sbu = 'CLDI'";
-                }
-                else if($selected_sbu == 'AIC'){
-                    $query .="AND ass.sbu = 'AIC'";
-                }
-                else if($selected_sbu == 'SUKIKO'){
-                    $query .="AND ass.sbu = 'SUKIKO'";
-                }
-                
-                $result = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result)){
-                        echo '<p>'.$row[0].'</p>';
-                }
-    // closing connection
-        mysqli_close($conn);
     }
 
 //Charts

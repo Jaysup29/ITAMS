@@ -99,8 +99,13 @@ function save_asset() {
     }
 }
 $('#addasset').on('hidden.bs.modal', function (e) {
-    console.log('helloworld')
     $('#myForm_addAsset')[0].reset();
+    document.getElementById('val_tag').classList.remove('was-validated');
+    document.getElementById('val_date').classList.remove('was-validated');
+    document.getElementById('val_asset').classList.remove('was-validated');
+    document.getElementById('val_type').classList.remove('was-validated');
+    document.getElementById('val_sbu').classList.remove('was-validated');
+    
 })
 
 function asset_list() {
@@ -197,10 +202,7 @@ function save_edited_assets() {
         }
     });
 }
-$('#addasset').on('hidden.bs.modal', function (e) {
-    //console.log('helloworld')
-    document.getElementById("myForm").reset();
-})
+
 //modal message delete
 function delete_asset_confirmation(id) {
 
@@ -238,11 +240,6 @@ function loadassets(keys) {
 
 }
 
-$('#addasset').on('hidden.bs.modal', function (e) {
-    //console.log('helloworld')
-    document.getElementById("myForm").reset();
-})
-
 function selection_type_of_device(){
     $.ajax({
         type: 'POST',
@@ -279,6 +276,10 @@ function assignasset_loader(id) {
         }
     });
 }
+$('#assignassetthruassets').on('hidden.bs.modal', function (e) {
+
+    $('#assigning-asset')[0].reset(); 
+})
 
 //load employee details thru their id
 function get_employees_detail(){
@@ -355,9 +356,6 @@ function submit_assignasset() {
     }
     
 }
-$('#assignassetthruassets').on('hidden.bs.modal', function (e) {
-    document.getElementById("assigning-asset").reset();
-})
 
 //display record list
 function record_list() {
@@ -390,7 +388,7 @@ function assign_asset_record() {
     var asset = $('#search_asset_record').val();
     if((asset == null) || (asset == ""))
     {
-        alert("Insert data");
+
     }
     else
     {
@@ -400,7 +398,6 @@ function assign_asset_record() {
             data: { function: 'get_asset', asset:asset},
             dataType: 'json',
             success: function(data){
-            console.log(data);
             $('#assign_asset_id_record').val(data[0]['id']);
             $('#assign_asset_tag_record').val(data[0]['asset_tag']);
             $('#assign_serial_record').val(data[0]['serial_no']);
@@ -412,10 +409,6 @@ function assign_asset_record() {
             }
         });
     }
-    
-    
-    
-
 }
 
 
@@ -435,7 +428,6 @@ function assign_emp_record() {
         data: { function: 'get_employee', employee_details: employee_details },
         dataType: 'json',
         success: function (data) {
-            console.log(data);
             $('#firstname_record').val(data[0]['first_name']);
             $('#lastname_record').val(data[0]['last_name']);
             $('#emp_sbu_record').val(data[0]['sbu_id']);
@@ -494,7 +486,6 @@ function submit_assign_record() {
 }
 
 $('#assignassetthrurecord').on('hidden.bs.modal', function (e) {
-    console.log('Hello World');
     $('#myForm_record')[0].reset();
 })
 
@@ -560,15 +551,15 @@ function submit_updated_details() {
     }   
 }
 $('#viewrecorddetails').on('hidden.bs.modal', function (e) {
-    document.getElementById("update-assign-details").reset();
+    document.getElementById('val_remarks_record').classList.remove('was-validated');
+    document.getElementById('val_location_recorded').classList.remove('was-validated');
+    $('#update-assign-details')[0].reset();
 })
 
 //modal message confirmation return
 function return_asset_confirmation(return_id){
-    
     $('#returnconfirmationmessage').modal('show');
-    $('#returnconfirmationmessage').attr('confirmation_return', return_id);
-    
+    $('#returnconfirmationmessage').attr('confirmation_return', return_id); 
 }
 
 function return_asset_trigger(id) {
@@ -584,25 +575,32 @@ function return_asset_trigger(id) {
         document.getElementById('val_asstatus').classList.add('was-validated');
         document.getElementById('val_notes').classList.add('was-validated');
         
-    }else{
+    }
+    else
+    {
         $.ajax({
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'return_asset', id: id, collectedby:collectedby, asset_remarks:asset_remarks, returnnote:returnnote},
         dataType: 'text',
-        success: function (data) {           
+        success: function (data) {
+            alert(data);
+            
+            setTimeout(function(){
+                $('#returnconfirmationmessage').modal('hide');
+                record_list();
+            }, 500);
         }
-    });
+        });
     
-    alert(data);
-    setTimeout(function(){
-        $('#returnconfirmationmessage').modal('hide');
-        record_list();
-    }, 1000);
     }
     
 }
+
 $('#returnconfirmationmessage').on('hidden.bs.modal', function (e) {
+    document.getElementById('val_collect').classList.remove('was-validated');
+    document.getElementById('val_asstatus').classList.remove('was-validated');
+    document.getElementById('val_notes').classList.remove('was-validated');
     $('#form-return')[0].reset();
 })
 
@@ -679,9 +677,11 @@ function generate_acc_form(id){
         dataType: 'json',
         success: function(data)
         {
+            console.log(data);
             var status = data[0].Accountability_status;
             var id = data[0].Accountability_ID;
-
+            console.log(status);
+            console.log(id);
             if(status == 0)
             {
                 setTimeout(function(){
@@ -723,108 +723,6 @@ function generate_single_af(recordid){
 
 
 //Dashboard
-function working(){
-    
-    var selected_sbu = $("#select_sbu").val();
-      
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'working_assets', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#working').empty();
-            $('#working').append(data);
-        }
-    });
-}
-
-function missing(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'missing_assets', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#missing').empty();
-            $('#missing').append(data);
-        }
-    });
-}
-
-function dispose(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'dispose_assets', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#dispose').empty();
-            $('#dispose').append(data);
-        }
-    });
-}
-
-function damageordefect(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'damageordefect_assets', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#damage_or_defective').empty();
-            $('#damage_or_defective').append(data);
-        }
-    });
-}
-
-function sparedevicesavailable(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'sparedevicesavailable_assets', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#spare_devices_avail').empty();
-            $('#spare_devices_avail').append(data);
-        }
-    });
-}
-
-function totaldevices(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'total_devices', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-
-            $("#totaldevices").empty();
-            $("#totaldevices").append(data);
-        }
-    });
-}
-
 function sumOfMainDevices(){
     var selected_sbu = $("#select_sbu").val();
     
@@ -833,112 +731,63 @@ function sumOfMainDevices(){
         url: 'ajax.php',
         data: { function: 'MainDevices', selected_sbu:selected_sbu},
         dataType: 'json',
-        success: function(data){
-            console.log(data);
+        success: function(data)
+        {
+            var Working = data[0].Working;
+            var Missing = data[0].Missing;
+            var Disposed = data[0].Disposed;
+            var Defective = data[0].Defective;
+            var Spare = data[0].Spare;
+            var Total = data[0].Total;
+            
+            $("#working").empty();
+            $('#working').append(Working);
+            $("#missing").empty();
+            $('#missing').append(Missing);
+            $("#dispose").empty();
+            $('#dispose').append(Disposed);
+            $("#damage_or_defective").empty();
+            $('#damage_or_defective').append(Defective);
+            $("#spare_devices_avail").empty();
+            $('#spare_devices_avail').append(Spare);
+            $("#totaldevices").empty();
+            $('#totaldevices').append(Total);
+            
         }
     });
 }
-
 
 // pheripherals
-function working_pheripherals(){
-    
+function sumOfPheripheralDevices(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
         type: 'POST',
         url: 'ajax.php',
-        data: { function: 'working_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
+        data: { function: 'PheripheralDevices', selected_sbu:selected_sbu},
+        dataType: 'json',
+        success: function(data)
+        {
+            var Working = data[0].Working;
+            var Missing = data[0].Missing;
+            var Disposed = data[0].Disposed;
+            var Defective = data[0].Defective;
+            var Spare = data[0].Spare;
+            var Total = data[0].Total;
             
-            $('#working_pheripherals').empty();
-            $('#working_pheripherals').append(data);
-        }
-    });
-}
-
-function missing_pheripherals(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'missing_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#missing_pheripherals').empty();
-            $('#missing_pheripherals').append(data);
-        }
-    });
-}
-
-function dispose_pheripherals(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'dispose_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#dispose_pheripherals').empty();
-            $('#dispose_pheripherals').append(data);
-        }
-    });
-}
-
-function damage_or_defective_pheripherals(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'damage_or_defective_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#damage_or_defective_pheripherals').empty();
-            $('#damage_or_defective_pheripherals').append(data);
-        }
-    });
-}
-
-function spare_devices_avail_pheripherals(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'spare_devices_avail_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-            
-            $('#spare_devices_avail_pheripherals').empty();
-            $('#spare_devices_avail_pheripherals').append(data);
-        }
-    });
-}
-
-function totaldevicespheripherals(){
-    
-    var selected_sbu = $("#select_sbu").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: 'ajax.php',
-        data: { function: 'total_devices_pheripherals', selected_sbu:selected_sbu},
-        dataType: 'text',
-        success: function(data){
-
+            $("#working_pheripherals").empty();
+            $('#working_pheripherals').append(Working);
+            $("#missing_pheripherals").empty();
+            $('#missing_pheripherals').append(Missing);
+            $("#dispose_pheripherals").empty();
+            $('#dispose_pheripherals').append(Disposed);
+            $("#damage_or_defective_pheripherals").empty();
+            $('#damage_or_defective_pheripherals').append(Defective);
+            $("#spare_devices_avail_pheripherals").empty();
+            $('#spare_devices_avail_pheripherals').append(Spare);
             $("#totaldevicespheripherals").empty();
-            $("#totaldevicespheripherals").append(data);
+            $('#totaldevicespheripherals').append(Total);
+            
         }
     });
 }
@@ -1252,7 +1101,6 @@ function update_users_accounts(){
         }
     });                                            
 }
-
 
 function upload_file(){
     var file_value = $('#upload_csv').val();

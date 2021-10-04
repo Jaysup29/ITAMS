@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-10 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="search_asset_record" placeholder="search assets details">
+                        <input type="text" class="form-control" id="search_asset_record" placeholder="search assets details" required>
                         <button class="btn btn-primary" onclick="assign_asset_record()"><i class='bx bx-search'></i></button>
                     </div>
                 </div>
@@ -113,9 +113,11 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col">
+                <div class="col needs-validaton" id="location" novalidation>
                     <label for="location_record" class="form-label" >Location</label>
                     <input type="text" class="form-control" id="location_record" name="location" placeholder="" required>
+                    <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">This field is required!</div>
                 </div>
             </div>
             </form>
@@ -127,7 +129,6 @@
     </div>
   </div>
 </div>
-
 
 <script>
 $(document).ready(function(){

@@ -162,41 +162,22 @@
 </div>
 <script>
 $(function(){
-    working();
-    missing();
-    dispose();
-    damageordefect();
-    sparedevicesavailable();
+
     dashboard_assets_status();
     dashboard_assets_status_pheripherals();
-    working_pheripherals();
-    missing_pheripherals();
-    dispose_pheripherals();
-    damage_or_defective_pheripherals();
-    spare_devices_avail_pheripherals();
     mychartsAssets();
     mychartsPheripherals();
-    totaldevices();
-    totaldevicespheripherals()
+    sumOfMainDevices();
+    sumOfPheripheralDevices();
 });
 $(document).ready(function()
     {
     $("select#select_sbu").change(function () {
         var select_sbu = $('#select_sbu option:selected').val();
-        working();
-        missing();
-        dispose();
-        damageordefect();
-        sparedevicesavailable();
-        working_pheripherals();
-        missing_pheripherals();
-        dispose_pheripherals();
-        damage_or_defective_pheripherals();
-        spare_devices_avail_pheripherals();
         dashboard_assets_status();
         dashboard_assets_status_pheripherals();
-        totaldevices();
-        totaldevicespheripherals();
+        sumOfMainDevices();
+        sumOfPheripheralDevices();
     
     });
 })
