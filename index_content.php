@@ -21,37 +21,37 @@
         <div class="row gx-1">
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="working_items">
-                    <p class="text-center text-white pt-2">WORKING</p>
+                    <p class="text-center text-white pt-2 m-0">WORKING</p>
                     <h2 class="text-white text-center" id="working"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="missing_items">
-                    <p class="text-center text-white pt-2">MISSING</p>
+                    <p class="text-center text-white pt-2 m-0">MISSING</p>
                     <h2 class="text-white text-center" id="missing"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12 ">
                 <div class="rounded-3 border shadow-sm" id="dispose_items">
-                    <p class="text-center text-white pt-2">FOR DISPOSE</p>
+                    <p class="text-center text-white pt-2 m-0">FOR DISPOSE</p>
                     <h2 class="text-white text-center" id="dispose"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="damage_items">
-                    <p class="text-center text-white pt-2">DAMAGE/DEFECTIVE</p>
+                    <p class="text-center text-white pt-2 m-0">DAMAGE/DEFECTIVE</p>
                     <h2 class="text-white text-center" id="damage_or_defective"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="available_spare_items">
-                    <p class="text-center text-white pt-2">SPARE DEVICES/AVAILABLE</p>
+                    <p class="text-center text-white pt-2 m-0">SPARE DEVICES</p>
                     <h2 class="text-white text-center" id="spare_devices_avail"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="available_spare_items">
-                    <p class="text-center text-white pt-2">TOTAL DEVICES</p>
+                    <p class="text-center text-white pt-2 m-0">TOTAL DEVICES</p>
                     <h2 class="text-white text-center" id="totaldevices"></h2>
                 </div>
             </div>
@@ -93,37 +93,37 @@
         <div class="row gx-1">
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="working_items">
-                    <p class="text-center text-white pt-2">WORKING</p>
+                    <p class="text-center text-white pt-2 m-0">WORKING</p>
                     <h2 class="text-white text-center" id="working_pheripherals"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="missing_items">
-                    <p class="text-center text-white pt-2">MISSING</p>
+                    <p class="text-center text-white pt-2 m-0">MISSING</p>
                     <h2 class="text-white text-center" id="missing_pheripherals"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="dispose_items">
-                    <p class="text-center text-white pt-2">FOR DISPOSE</p>
+                    <p class="text-center text-white pt-2 m-0">FOR DISPOSE</p>
                     <h2 class="text-white text-center" id="dispose_pheripherals"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="damage_items">
-                    <p class="text-center text-white pt-2">DAMAGE/DEFECTIVE</p>
+                    <p class="text-center text-white pt-2 m-0">DAMAGE/DEFECTIVE</p>
                     <h2 class="text-white text-center" id="damage_or_defective_pheripherals"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12 ">
                 <div class="rounded-3 border shadow-sm" id="available_spare_items">
-                    <p class="text-center text-white pt-2">SPARE DEVICES/AVAILABLE</p>
+                    <p class="text-center text-white pt-2 m-0">SPARE DEVICES</p>
                     <h2 class="text-white text-center" id="spare_devices_avail_pheripherals"></h2>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="rounded-3 border shadow-sm" id="available_spare_items">
-                    <p class="text-center text-white pt-2">TOTAL DEVICES</p>
+                    <p class="text-center text-white pt-2 m-0">TOTAL DEVICES</p>
                     <h2 class="text-white text-center" id="totaldevicespheripherals"></h2>
                 </div>
             </div>
