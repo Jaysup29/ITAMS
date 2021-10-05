@@ -87,6 +87,12 @@
 
         </section>
     </div>
+    <footer class="main-footer p-3">
+    <strong>Copyright &copy; 2021.</strong>
+    <span>Developed &amp; Designed By:</span>
+    <span class="text-primary">JRevis.</span>
+    All rights reserved.
+    </footer>
     <script src="./js/script.js"></script>
 <!--    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>-->
 <!--    <script src="./node_modules/jquery/dist/jquery.js"></script>-->

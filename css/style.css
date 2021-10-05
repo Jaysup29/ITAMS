@@ -199,3 +199,7 @@
 #search-addon{
     background-color: #f8f9fc !important; 
 }
+footer{
+    position: absolute;
+    left: 5%;
+}
