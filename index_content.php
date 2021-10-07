@@ -59,7 +59,7 @@
     </div>
     <div class="row g-2 mx-3 mt-1">
         <div class="col-lg-6 col-md-12">
-            <div class="p-3 rounded shadow-sm bg-light h-100 table-responsive">
+            <div class="p-3 rounded shadow-sm bg-white h-100 table-responsive">
                 <div class="text-center pt-3 g-5 ">TABLE ASSET STATUS INTERPRETATION</div>
                 <table class="table">
                     <thead>
@@ -80,7 +80,7 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-12">
-            <div class="p-3 rounded shadow-sm bg-light h-100">
+            <div class="p-3 rounded shadow-sm bg-white h-100">
                 <div class="text-center pt-3">GRAPH ASSET STATUS INTERPRETATION</div>
                 <canvas id="myChartAssets"></canvas>
             </div>
@@ -131,7 +131,7 @@
     </div>
     <div class="row g-2 mx-3 mt-1">
         <div class="col-lg-6 col-md-12">
-            <div class="p-3 rounded shadow-sm bg-light h-100 table-responsive">
+            <div class="p-3 rounded shadow-sm bg-white h-100 table-responsive">
                 <div class="text-center pt-3 g-5">TABLE ASSET STATUS INTERPRETATION</div>
                 <table class="table table-responsive">
                     <thead>
@@ -152,7 +152,7 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-12">
-            <div class="p-3 rounded shadow-sm bg-light h-100">
+            <div class="p-3 rounded shadow-sm bg-white h-100">
                 <div class="text-center pt-3">GRAPH ASSET STATUS INTERPRETATION(Pheripherals)</div>
                 <canvas id="myChartPheripherals"></canvas>
             </div>
