@@ -1,3 +1,9 @@
+<?php
+    if(!isset($_SESSION['emp_id'])){
+        header("Location: login.php");
+        exit();
+    }
+?>
 <div class="modal fade" tabindex="-1" id="deleteasset">
   <div class="modal-dialog">
     <div class="modal-content">

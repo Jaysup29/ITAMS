@@ -87,7 +87,7 @@ switch($asset_sbu){
         
         $this->SetFont('helvetica', '', 8);
         $this->MultiCell(90, 15, '', 1, 'C', 0, 0, '', '', true, 0, false, true, 15, 'B');
-        $this->MultiCell(90, 15, '', 1, 'C', 0, 1, '', '', true, 0, false, true, 15, 'B');
+        $this->MultiCell(90, 15, $emp_fullname, 1, 'C', 0, 1, '', '', true, 0, false, true, 15, 'B');
         
         $this->SetFont('helvetica', 'B', 8);
         $this->setCellPaddings(1, 1, 1, 1);

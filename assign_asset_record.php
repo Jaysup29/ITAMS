@@ -1,3 +1,9 @@
+<?php
+    if(!isset($_SESSION['emp_id'])){
+        header("Location: login.php");
+        exit();
+    }
+?>
 <div class="modal fade" tabindex="-1" id="assignassetthrurecord" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">

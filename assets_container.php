@@ -62,11 +62,6 @@
                
                 </tbody>
                 </table>
-<!--
-                <div class="spinner-border text-primary" role="status" id="spinner" style="position: absolute; top: 50%; left: 50%;">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
--->
             </div>
         </div>
     </div>
