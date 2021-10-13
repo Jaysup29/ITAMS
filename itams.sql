@@ -41,17 +41,107 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Dumping structure for procedure itams.new_users
+DELIMITER //
+CREATE PROCEDURE `new_users`(
+in `in_employee_id` VARCHAR(200),
+in `in_first_name` VARCHAR(200),
+in `in_last_name` VARCHAR(200),
+in `in_mid_initial` VARCHAR(200),
+in `in_email` VARCHAR(200),
+in `in_user_name` VARCHAR(200),
+in `in_position` VARCHAR(200),
+in `in_password_1` VARCHAR(200),
+in `in_password_2` VARCHAR(200),
+in `in_sbu_id` VARCHAR(200),
+in `in_dept_id` VARCHAR(200),
+in `in_user_type` VARCHAR(200)
+)
+BEGIN
+	INSERT INTO tbl_employees (employee_id, first_name, last_name, mid_initial, email, user_name, position, password_1, password_2, sbu_id, dept_id, user_type) VALUES (
+    in_employee_id, in_first_name, in_last_name, in_mid_initial, in_email, in_user_name, in_position, in_password_1, in_password_2, in_sbu_id, in_dept_id, in_user_type);
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure itams.sp_update_asset_details
+DELIMITER //
+CREATE PROCEDURE `sp_update_asset_details`(
+in `upd_id` VARCHAR(200),
+in `upd_asset_tag` VARCHAR(200),
+in `upd_asset_name` VARCHAR(200),
+in `upd_descriptions` VARCHAR(200),
+in `upd_serial_no` VARCHAR(200),
+in `upd_price` VARCHAR(200),
+in `upd_sbu` VARCHAR(200),
+in `upd_date_purchase` VARCHAR(200),
+in `upd_installed_os` VARCHAR(200),
+in `upd_ms_office` VARCHAR(200),
+in `upd_remarks` VARCHAR(200),
+in `upd_type_of` VARCHAR(200),
+in `upd_status` VARCHAR(200)
+)
+BEGIN
+	UPDATE tbl_assets as asset
+    SET
+    asset.asset_tag = upd_asset_tag, 
+    asset.date_purchase = upd_date_purchase, 
+    asset.asset_name = upd_asset_name, 
+    asset.serial_no = upd_serial_no, 
+    asset.descriptions = upd_descriptions, 
+    asset.sbu = upd_sbu, 
+    asset.price = upd_price, 
+    asset.installed_os = upd_installed_os, 
+    asset.ms_office = upd_ms_office, 
+    asset.remarks = upd_remarks, 
+    asset.type_of = upd_type_of, 
+    asset.status = upd_status
+    WHERE asset.id = upd_id;
+END//
+DELIMITER ;
+
 -- Dumping structure for table itams.tbl_accountability
 CREATE TABLE IF NOT EXISTS `tbl_accountability` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `record_id` int(11) DEFAULT NULL,
+  `record_id` varchar(50) DEFAULT NULL,
   `date_created` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table itams.tbl_accountability: ~0 rows (approximately)
+-- Dumping data for table itams.tbl_accountability: ~30 rows (approximately)
 /*!40000 ALTER TABLE `tbl_accountability` DISABLE KEYS */;
+INSERT INTO `tbl_accountability` (`id`, `record_id`, `date_created`, `user_id`) VALUES
+	(1, '1', '2021-10-01 09:19:56', 1),
+	(2, 'NA', '2021-10-01 09:26:01', 1),
+	(3, 'NA', '2021-10-01 09:26:03', 1),
+	(4, 'NA', '2021-10-01 09:26:04', 1),
+	(5, '1', '2021-10-01 09:27:50', 1),
+	(6, '0', '2021-10-01 09:34:43', 1),
+	(7, '0', '2021-10-01 09:35:06', 1),
+	(8, '0', '2021-10-01 09:35:50', 1),
+	(9, '0', '2021-10-01 09:35:51', 1),
+	(10, '0', '2021-10-01 09:36:27', 1),
+	(11, '0', '2021-10-01 09:36:27', 1),
+	(12, '0', '2021-10-01 09:36:44', 1),
+	(13, '0', '2021-10-01 09:37:14', 1),
+	(14, '0', '2021-10-01 09:38:03', 1),
+	(15, '0', '2021-10-01 09:38:04', 1),
+	(16, '0', '2021-10-01 09:38:04', 1),
+	(17, '0', '2021-10-01 09:38:04', 1),
+	(18, '0', '2021-10-01 09:38:04', 1),
+	(19, '0', '2021-10-01 09:38:05', 1),
+	(20, '0', '2021-10-01 09:39:14', 1),
+	(21, '0', '2021-10-01 09:40:10', 1),
+	(22, '0', '2021-10-01 09:41:08', 1),
+	(23, '0', '2021-10-01 09:41:44', 1),
+	(24, '0', '2021-10-01 09:42:24', 1),
+	(25, '0', '2021-10-01 09:42:52', 1),
+	(26, '0', '2021-10-01 09:43:05', 1),
+	(27, '0', '2021-10-01 09:43:35', 1),
+	(28, 'NA', '2021-10-01 09:44:06', 1),
+	(29, '1', '2021-10-13 15:05:11', 1),
+	(30, '4', '2021-10-13 15:05:27', 1),
+	(31, 'NA', '2021-10-13 15:05:44', 1);
 /*!40000 ALTER TABLE `tbl_accountability` ENABLE KEYS */;
 
 -- Dumping structure for table itams.tbl_assets
@@ -73,16 +163,16 @@ CREATE TABLE IF NOT EXISTS `tbl_assets` (
   PRIMARY KEY (`id`),
   KEY `FK_tbl_assets_tbl_item` (`type_of`),
   CONSTRAINT `FK_tbl_assets_tbl_item` FOREIGN KEY (`type_of`) REFERENCES `tbl_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table itams.tbl_assets: ~198 rows (approximately)
+-- Dumping data for table itams.tbl_assets: ~202 rows (approximately)
 /*!40000 ALTER TABLE `tbl_assets` DISABLE KEYS */;
 INSERT INTO `tbl_assets` (`id`, `asset_tag`, `asset_name`, `descriptions`, `serial_no`, `price`, `sbu`, `date_purchase`, `installed_os`, `ms_office`, `remarks`, `type_of`, `status`, `quantity`) VALUES
 	(1, 'SWC-PNKC-WS-00043', 'LENOVO', '', 'PF0B1XEG', '31000', 'PNKC', '2015-10-06 00:00:00', 'WINDOWS 10 HOME SINGLE LANGUAGE', 'MS OFFICE 2013', 'WORKING CONDITION', 1, 'In use', 1),
 	(2, 'SWC-PNKC-WS-00020', 'LENOVO', '', 'SPF0UYS1L', '0', 'PNKC', '2018-12-01 00:00:00', 'WIN 10 SINGLE LANGUAGE', 'MS OFFICE 2013', 'WORKING CONDITION', 1, 'In use', 1),
 	(3, 'SWC-PNKC-WS-00071', 'LENOVO', '', 'MP13JH72', '28900', 'PNKC', '2016-09-16 00:00:00', 'WINDOWS 10 PRO', 'MS OFFICE 2013', 'WORKING CONDITION', 1, 'In use', 1),
 	(4, 'SWC-PNKC-WS-00002', 'NA', '', 'faded', '0', 'PNKC', '0000-00-00 00:00:00', 'WIN 7 32 bit', 'MS OFFICE 2007', 'WORKING CONDITION', 1, 'Available', 1),
-	(5, 'NA', 'TOSHIBA', '', '7 07 1905', '99999999999999999999999999999999999999999999999999', 'NA', '0000-00-00 00:00:00', 'NA', 'NA', 'FOR VALIDATION', 1, 'Missing', 1),
+	(5, 'NA', 'TOSHIBA', '', '7 07 1905', '0', 'NA', '0000-00-00 00:00:00', 'NA', 'NA', 'FOR VALIDATION', 1, 'Missing', 1),
 	(6, 'SWC-PNKC-WS-00001', 'Intel Core 2 Duo 2.26ghz, 1Gb,', '', 'SGH9120B61', '0', 'PNKC', '0000-00-00 00:00:00', 'NA', 'MS OFFICE 2007', 'obsolute device', 1, 'Disposed', 1),
 	(7, 'SWC-PNKC-WS-00178', 'NA', '', 'NA', '0', 'PNKC', '0000-00-00 00:00:00', 'NA', 'NA', 'defective motherboard / obsolute device', 2, 'Disposed', 1),
 	(8, 'NA', 'Lenovo 320-14, Core I5', '', 'SPF0W3WN3', '0', 'NA', '2018-01-26 00:00:00', '', '', 'FOR VALIDATION', 1, 'Missing', 1),
@@ -275,7 +365,12 @@ INSERT INTO `tbl_assets` (`id`, `asset_tag`, `asset_name`, `descriptions`, `seri
 	(195, 'SWC-PNKC-P-00136', 'APC 650va LI-MS', '', '9B1941A04166', '0', 'PNKC', '0000-00-00 00:00:00', 'NA', 'NA', 'WORKING CONDITION', 15, 'In use', 1),
 	(196, 'SWC-PNKC-WS-00112', 'ACER Travelmate ', '', 'NXVPNSP02X1280BEBE7600', '37500', 'PNKC', '2021-09-13 00:00:00', 'WIN 10 64 bit', 'NA', 'BRAND NEW', 1, 'In use', 1),
 	(197, 'SWC-PNKC-P-00116', 'TPLINK ARCHER C54 AC 1200', '', '22120V9004190', '1350', 'PNKC', '2021-08-14 00:00:00', 'NA', 'NA', 'BRAND NEW', 12, 'In use', 1),
-	(198, 'SWC-PNKC-P-00117', 'TPLINK ARCHER C54 AC 1200', '', '22120V9004188', '1350', 'PNKC', '2021-08-14 00:00:00', 'NA', 'NA', 'BRAND NEW', 12, 'In use', 1);
+	(198, 'SWC-PNKC-P-00117', 'TPLINK ARCHER C54 AC 1200', '', '22120V9004188', '1350', 'PNKC', '2021-08-14 00:00:00', 'NA', 'NA', 'BRAND NEW', 12, 'In use', 1),
+	(199, 'upd_asset_tag', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', 1, '', 1),
+	(200, 'NA', 'NA', 'NA NA NA', 'NA', '100', 'SUKIKO', '2021-10-13 00:00:00', 'Windows 11', '2021', 'Good', 17, 'Available', 1),
+	(201, 'NA2', 'NA2', '', 'NA2', '5000', 'SUKIKO', '1970-01-01 00:00:00', 'Windows 11', '2021', 'Good', 2, 'Available', 1),
+	(202, 'NA2', 'NA2', 'NA2 NA2 NA2', 'NA2', '100', 'SUKIKO', '2021-10-13 00:00:00', 'Windows 11', '2021', 'Good', 2, 'Available', 1),
+	(203, 'SAMPLE', 'Goods', 'GoodsGoodsGoodsGoods', 'Goods', '5000', 'GILI', '2021-10-13 00:00:00', 'Windows 11', '2021', 'Ready to use', 6, 'Available', 1);
 /*!40000 ALTER TABLE `tbl_assets` ENABLE KEYS */;
 
 -- Dumping structure for table itams.tbl_dept
@@ -343,12 +438,14 @@ CREATE TABLE IF NOT EXISTS `tbl_employees` (
   CONSTRAINT `FK_tbl_employees_tbl_dept` FOREIGN KEY (`dept_id`) REFERENCES `tbl_dept` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tbl_employees_tbl_sbu` FOREIGN KEY (`sbu_id`) REFERENCES `tbl_sbu` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tbl_employees_tbl_users` FOREIGN KEY (`user_type`) REFERENCES `tbl_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table itams.tbl_employees: ~1 rows (approximately)
+-- Dumping data for table itams.tbl_employees: ~0 rows (approximately)
 /*!40000 ALTER TABLE `tbl_employees` DISABLE KEYS */;
 INSERT INTO `tbl_employees` (`id`, `employee_id`, `first_name`, `last_name`, `mid_initial`, `email`, `user_name`, `position`, `password_1`, `password_2`, `sbu_id`, `dept_id`, `user_type`) VALUES
-	(1, 'AA20210001', 'Admin', 'Admin', 'A', 'Admin@gmail.com', 'admin123', 'IT', '123123', '123123', 7, 4, 2);
+	(1, 'AA20210001', 'Admin', 'Biboi', 'A', 'Admin@gmail.com', 'admin123', 'IT', '123123', '123123', 7, 4, 2),
+	(2, 'HB20210002', 'hotdag', 'Babaw', 'g', 'qweqwe', 'qweqwe', 'IT', '123123', '123123', 1, 1, 2),
+	(3, 'VE20210003', 'venson', 'estrope', 'V', 'venson@gmail.com', 'venson', 'IT', '123', '123', 1, 4, 2);
 /*!40000 ALTER TABLE `tbl_employees` ENABLE KEYS */;
 
 -- Dumping structure for table itams.tbl_item
@@ -406,10 +503,15 @@ CREATE TABLE IF NOT EXISTS `tbl_records` (
   KEY `FK_tbl_records_tbl_employees` (`emp_id`),
   CONSTRAINT `FK_tbl_records_tbl_assets` FOREIGN KEY (`asset_id`) REFERENCES `tbl_assets` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tbl_records_tbl_employees` FOREIGN KEY (`emp_id`) REFERENCES `tbl_employees` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table itams.tbl_records: ~0 rows (approximately)
+-- Dumping data for table itams.tbl_records: ~4 rows (approximately)
 /*!40000 ALTER TABLE `tbl_records` DISABLE KEYS */;
+INSERT INTO `tbl_records` (`id`, `date_created`, `asset_id`, `emp_id`, `location`, `emp_fname`, `emp_lname`, `emp_sbu`, `emp_position`, `asset_tag`, `asset_name`, `asset_descriptions`, `asset_type_of`, `asset_serial_no`, `asset_status`, `asset_remarks`, `record_status`, `acc_status`) VALUES
+	(1, '2021-10-01 00:00:00', 161, 1, 'dad', 'Admin', 'Admin', '7', 'admin123', 'SWC-PNKC-P-00120', 'TPLINK', '', '13', 'NA', 'Available', 'Working condition', 1, 1),
+	(2, '2021-10-13 00:00:00', 201, 1, 'Room 704', 'Admin', 'Admin', '7', 'admin123', 'NA2', 'NA2', 'NA2 NA2 NA2', '2', 'NA2', 'Available', 'Good', 1, 1),
+	(3, '2021-10-13 00:00:00', 202, 1, '21', 'Admin', 'Admin', '7', 'NA2', 'NA2', 'NA2', 'NA2 NA2 NA2', '2', 'NA2', 'Available', 'NA2', 1, 1),
+	(4, '2021-10-13 00:00:00', 200, 1, 'Room 708', 'Admin', 'Admin', '7', 'admin123', 'NA', 'NA', 'NA NA NA', 'Time keeping', 'NA', 'Available', 'Good', 1, 1);
 /*!40000 ALTER TABLE `tbl_records` ENABLE KEYS */;
 
 -- Dumping structure for table itams.tbl_return
@@ -423,10 +525,16 @@ CREATE TABLE IF NOT EXISTS `tbl_return` (
   PRIMARY KEY (`id`),
   KEY `FK_tbl_return_tbl_records` (`record_id`),
   CONSTRAINT `FK_tbl_return_tbl_records` FOREIGN KEY (`record_id`) REFERENCES `tbl_records` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table itams.tbl_return: ~0 rows (approximately)
+-- Dumping data for table itams.tbl_return: ~5 rows (approximately)
 /*!40000 ALTER TABLE `tbl_return` DISABLE KEYS */;
+INSERT INTO `tbl_return` (`id`, `return_date`, `record_id`, `collected_by`, `asset_remarks`, `note`) VALUES
+	(1, '2021-10-01 09:02:58', 1, 'Jay-ar Revis', 'Available', 'Good'),
+	(2, '2021-10-13 15:07:15', 4, 'Jay-ar Revis', 'Available', 'Goods'),
+	(3, '2021-10-13 15:07:23', 3, 'Jay-ar Revis', 'Available', 'Goods'),
+	(4, '2021-10-13 15:07:30', 2, 'Venson', 'Available', 'Goods'),
+	(5, '2021-10-13 15:07:37', 1, 'Goods', 'Available', 'Goods');
 /*!40000 ALTER TABLE `tbl_return` ENABLE KEYS */;
 
 -- Dumping structure for table itams.tbl_sbu
@@ -464,6 +572,42 @@ INSERT INTO `tbl_users` (`id`, `user_legend`) VALUES
 	(1, 'Admin'),
 	(2, 'User');
 /*!40000 ALTER TABLE `tbl_users` ENABLE KEYS */;
+
+-- Dumping structure for procedure itams.update_asset
+DELIMITER //
+CREATE PROCEDURE `update_asset`(
+in `upd_id` VARCHAR(200),
+in `upd_asset_tag` VARCHAR(200),
+in `upd_asset_name` VARCHAR(200),
+in `upd_descriptions` VARCHAR(200),
+in `upd_serial_no` VARCHAR(200),
+in `upd_price` VARCHAR(200),
+in `upd_sbu` VARCHAR(200),
+in `upd_date_purchase` VARCHAR(200),
+in `upd_installed_os` VARCHAR(200),
+in `upd_ms_office` VARCHAR(200),
+in `upd_remarks` VARCHAR(200),
+in `upd_type_of` VARCHAR(200),
+in `upd_status` VARCHAR(200)
+)
+BEGIN
+	UPDATE itams.tbl_assets as assets 
+    SET 
+    assets.asset_tag = upd_asset_tag, 
+    assets.asset_name = upd_asset_name,
+    assets.descriptions = upd_descriptions,
+    assets.serial_no = upd_serial_no, 
+    assets.price = upd_price, 
+    assets.sbu = upd_sbu, 
+    assets.date_purchase = upd_date_purchase, 
+    assets.installed_os = upd_installed_os, 
+    assets.ms_office = upd_ms_office, 
+    assets.remarks = upd_remarks, 
+    assets.type_of = upd_type_of,
+    assets.status = upd_status
+    WHERE assets.id = upd_id;
+END//
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

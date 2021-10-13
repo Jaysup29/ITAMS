@@ -3,3 +3,5 @@ add asset - Natatapos yung transaction kahjit incomplete yung data to provide at
 accountability form - kapag overall generate nakukuha pa rin yung mga nagenerate na single AF 
 add user - kapag hindi complete yung data at accidentally na masubmit nagcacall sya ng error pero nagrereset at hindi nagsasave
 add asset - yung incrementation ng id nagstart on 120
+update asset - walang validation kaya kung pwede burahin lang pwede.
+logs to user update details - kapag nagchange ng bagong name hindi na nadadala sa logs(key: emp id kuhanin).
