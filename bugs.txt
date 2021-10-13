@@ -1,0 +1,5 @@
+ITAMS Bugs (As of Oct. 13, 2021)
+add asset - Natatapos yung transaction kahjit incomplete yung data to provide at hindi nagsasave
+accountability form - kapag overall generate nakukuha pa rin yung mga nagenerate na single AF 
+add user - kapag hindi complete yung data at accidentally na masubmit nagcacall sya ng error pero nagrereset at hindi nagsasave
+add asset - yung incrementation ng id nagstart on 120
