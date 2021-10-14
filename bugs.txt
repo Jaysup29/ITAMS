@@ -5,3 +5,4 @@ add user - kapag hindi complete yung data at accidentally na masubmit nagcacall 
 add asset - yung incrementation ng id nagstart on 120
 update asset - walang validation kaya kung pwede burahin lang pwede.
 logs to user update details - kapag nagchange ng bagong name hindi na nadadala sa logs(key: emp id kuhanin).
+edit user details - i-limit ang mga user details na pwedeng baguhin(key).
