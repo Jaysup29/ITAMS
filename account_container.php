@@ -16,46 +16,60 @@
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-parent="#accordionFlushExample">
                           <div class="accordion-body">
                               <form class="row g-1" id="form1">
-                                <div class="col-lg-5 col-md-12">
+                                <div class="col-lg-5 col-md-12 needs-validaton" id="val_lastname" novalidation>
                                     <label for="add_lname" class="form-label">Last name</label>
-                                    <input type="text" class="form-control" id="add_lname" placeholder="">
+                                    <input type="text" class="form-control" id="add_lname" placeholder="" value="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-5 col-md-12">
+                                <div class="col-lg-5 col-md-12 needs-validaton" id="val_firstname" novalidation>
                                     <label for="add_fname" class="form-label">First name</label>
-                                    <input type="text" class="form-control" id="add_fname" placeholder="">
+                                    <input type="text" class="form-control" id="add_fname" placeholder="" value="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
                                 <div class="col-lg-2 col-md-12">
                                     <label for="add_mi" class="form-label">M.I</label>
                                     <input type="text" class="form-control" id="add_mi" placeholder="">
                                   </div>
-                                <div class="col-lg-6 col-md-12 mt-2">
+                                <div class="col-lg-6 col-md-12 mt-2 needs-validaton" id="val_username" novalidation>
                                     <label for="add_uname" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="add_uname" placeholder="">
+                                    <input type="text" class="form-control" id="add_uname" placeholder="" value="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-6 col-md-12 mt-2">
+                                <div class="col-lg-6 col-md-12 mt-2 needs-validaton" id="val_email" novalidation>
                                     <label for="add_email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="add_email" placeholder="">
+                                    <input type="text" class="form-control" id="add_email" placeholder="" value="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_password1" novalidation>
                                     <label for="add_pword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="add_pword1" placeholder="">
+                                    <input type="password" class="form-control" id="add_pword1" placeholder="" value="" required>
                                     <input type="checkbox" onclick="addshowpass()">&nbsp;Show Password
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_password2" novalidation>
                                     <label for="add_pword" class="form-label">Re-type Password</label>
-                                    <input type="password" class="form-control" id="add_pword2" placeholder="">
+                                    <input type="password" class="form-control" id="add_pword2" placeholder="" value="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_usertype" novalidation>
                                       <label for="usertype" class="form-label">User Type</label>
                                       <select id="usertype" class="form-select" required>
                                         <option value="2">User</option>
                                         <option value="1">Admin</option>
                                         <option value="0">SuperAdmin</option>
                                       </select>
+                                      <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_usersbu" novalidation>
                                       <label for="add_sbu" class="form-label">SBU</label>
-                                      <select id="add_sbu" class="form-select" required>
+                                      <select id="add_sbu" class="form-select" value="" required>
                                         <option selected disabled value="">Choose...</option>
                                         <option value="1">AIC</option>
                                         <option value="2">EXERGY</option>
@@ -65,12 +79,14 @@
                                         <option value="6">CLDI</option>
                                         <option value="7">SUKIKO</option>
                                       </select>
+                                      <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 mt-2">
                                     <label for="add_pos" class="form-label">Position</label>
                                     <input type="text" class="form-control" id="add_pos" placeholder="">
                                   </div>
-                                <div class="col-lg-6 col-md-12 mt-2">
+                                <div class="col-lg-6 col-md-12 mt-2 needs-validaton" id="val_dept" novalidation>
                                     <label for="add_dept" class="form-label">Department</label>
                                       <select id="add_dept" class="form-select" required>
                                         <option selected disabled value="">Choose...</option>
@@ -79,6 +95,8 @@
                                         <option value="3">HR</option>
                                         <option value="4">IT</option>
                                       </select>
+                                      <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
                               </form>
                                 <div class="col-lg-12 col-md-12 mt-3 d-grid">
@@ -96,36 +114,50 @@
                         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                           <div class="accordion-body">
                                 <form class="row g-1" id="form2">
-                                <div class="col-lg-5 col-md-12">
+                                <div class="col-lg-5 col-md-12 needs-validaton" id="val_upd_lastname" novalidation>
                                     <label for="update_lname" class="form-label">Last name</label>
-                                    <input type="text" class="form-control" id="update_lname" placeholder="">
+                                    <input type="text" class="form-control" id="update_lname" placeholder="" disabled>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-5 col-md-12">
+                                <div class="col-lg-5 col-md-12 needs-validaton" id="val_upd_firstname" novalidation>
                                     <label for="update_fname" class="form-label">First name</label>
-                                    <input type="text" class="form-control" id="update_fname" placeholder="">
+                                    <input type="text" class="form-control" id="update_fname" placeholder="" disabled>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-2 col-md-12">
+                                <div class="col-lg-2 col-md-12 needs-validaton" id="val_upd_mi" novalidation>
                                     <label for="update_mi" class="form-label">M.I</label>
-                                    <input type="text" class="form-control" id="update_mi" placeholder="">
+                                    <input type="text" class="form-control" id="update_mi" placeholder="" disabled>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-6 col-md-12 mt-2">
+                                <div class="col-lg-6 col-md-12 mt-2 needs-validaton" id="val_upd_username" novalidation>
                                     <label for="update_uname" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="update_uname" placeholder="">
+                                    <input type="text" class="form-control" id="update_uname" placeholder="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-6 col-md-12 mt-2">
+                                <div class="col-lg-6 col-md-12 mt-2 needs-validaton" id="val_upd_email" novalidation>
                                     <label for="update_email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="update_email" placeholder="">
+                                    <input type="text" class="form-control" id="update_email" placeholder="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_upd_pass1" novalidation>
                                     <label for="update_pword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control mb-1" id="update_pword1" placeholder="">
+                                    <input type="password" class="form-control mb-1" id="update_pword1" placeholder="" required>
                                     <input type="checkbox" onclick="updateshowpass()">&nbsp;Show Password
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_upd_pass2" novalidation>
                                     <label for="update_pword2" class="form-label">Re-type Password</label>
-                                    <input type="password" class="form-control" id="update_pword2" placeholder="">
+                                    <input type="password" class="form-control" id="update_pword2" placeholder="" required>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
-                                <div class="col-lg-12 col-md-12 mt-2">
+                                <div class="col-lg-12 col-md-12 mt-2 needs-validaton" id="val_upd_sbu" novalidation>
                                       <label for="update_sbu" class="form-label">SBU</label>
                                       <select id="update_sbu" class="form-select" required>
                                         <option selected disabled value="">Choose...</option>
@@ -137,12 +169,14 @@
                                         <option value="6">CLDI</option>
                                         <option value="7">SUKIKO</option>
                                       </select>
+                                      <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 mt-2">
                                     <label for="update_pos" class="form-label">Position</label>
                                     <input type="text" class="form-control" id="update_pos" placeholder="">
                                   </div>
-                                <div class="col-lg-6 col-md-12 mt-2">
+                                <div class="col-lg-6 col-md-12 mt-2 needs-validaton" id="val_upd_dept" novalidation>
                                     <label for="update_dept" class="form-label">Department</label>
                                       <select id="update_dept" class="form-select" required>
                                         <option selected disabled value="">Choose...</option>
@@ -151,6 +185,8 @@
                                         <option value="3">HR</option>
                                         <option value="4">IT</option>
                                       </select>
+                                      <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback"></div>
                                   </div>
                               </form>
                                 <div class="col-lg-12 col-md-12 mt-3 d-grid">

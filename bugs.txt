@@ -1,8 +1,8 @@
 ITAMS Bugs (As of Oct. 13, 2021)
-add asset - Natatapos yung transaction kahjit incomplete yung data to provide at hindi nagsasave
+add asset - Natatapos yung transaction kahjit incomplete yung data to provide at hindi nagsasave(oks but not satisfied)
 accountability form - kapag overall generate nakukuha pa rin yung mga nagenerate na single AF 
-add user - kapag hindi complete yung data at accidentally na masubmit nagcacall sya ng error pero nagrereset at hindi nagsasave
+add user - kapag hindi complete yung data at accidentally na masubmit nagcacall sya ng error pero nagrereset at hindi nagsasave(done)
 add asset - yung incrementation ng id nagstart on 120
 update asset - walang validation kaya kung pwede burahin lang pwede.
 logs to user update details - kapag nagchange ng bagong name hindi na nadadala sa logs(key: emp id kuhanin).
-edit user details - i-limit ang mga user details na pwedeng baguhin(key).
+edit user details - i-limit ang mga user details na pwedeng baguhin(key).(done)

@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./node_modules/boxicons/css/boxicons.min.css">
     <link rel="stylesheet" href="./node_modules/mdb-ui-kit/css/mdb.min.css">
+    <link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">
+    <script src="./node_modules/select2/dist/js/select2.min.js"></script>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     
     <title>Document</title>

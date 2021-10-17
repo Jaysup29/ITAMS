@@ -53,17 +53,14 @@ function save_asset() {
     var type = $('#new_type').val();
     var status = $('#new_status').val();
 
-    if ((asset_tag == "") || (asset_tag == null) && (date_purchase == null) || (date_purchase == "") && (asset_name == null) || (asset_name == "") && (sbu == null) || (sbu == "") && (type == null) || (type == "")) {
-
-
+    if ((asset_tag == "") || (asset_tag == null) || (date_purchase == null) || (date_purchase == "") || (asset_name == null) || (asset_name == "") || (sbu == null) || (sbu == "") || (type == null) || (type == ""))
+    {
         document.getElementById('val_tag').classList.add('was-validated');
         document.getElementById('val_date').classList.add('was-validated');
         document.getElementById('val_asset').classList.add('was-validated');
         document.getElementById('val_type').classList.add('was-validated');
         document.getElementById('val_sbu').classList.add('was-validated');
-        ////        return false;
-
-    } else {
+    }else {
         $.ajax({
             type: 'POST',
             url: 'ajax.php',
@@ -83,7 +80,6 @@ function save_asset() {
                 remarks: remarks,
                 type: type,
                 status: status
-
             },
             dataType: 'text',
             success: function (data) {
@@ -955,16 +951,33 @@ function adduser(){
     var position = $('#add_pos').val();
     var department = $('#add_dept').val();
     
-    if((lastname == "")||(lastname == "")||(firstname == "")||(firstname == "")||(username == "")||(username == "")||(email == "")||(email == "")||(password_1 == "")||(password_1 == "")||(password_2 == "")||(password_2 == "")||(emp_sbu == "")||(emp_sbu == "")||(department == "")||(department == "")){
-        
-        alert("Please fill out the fields properly!");
-        
-    }else if((password_1 !== password_2)){
-        
-        alert("Password are not the same!");
-        
-    }else{
-        
+    if((lastname == null)||(lastname == "")||
+    (firstname == null)||(firstname == "")||
+    (username == null)||(username == "")||
+    (email == null)||(email == "")||
+    (password_1 == null)||(password_1 == "")||
+    (password_2 == null)||(password_2 == "")||
+    (emp_sbu == null)||(emp_sbu == "")||
+    (user_type == null)||(user_type == "")||
+    (department == null)||(department == ""))
+    {
+        document.getElementById('val_lastname').classList.add('was-validated');
+        document.getElementById('val_firstname').classList.add('was-validated');
+        document.getElementById('val_username').classList.add('was-validated');
+        document.getElementById('val_email').classList.add('was-validated');
+        document.getElementById('val_password1').classList.add('was-validated');
+        document.getElementById('val_password2').classList.add('was-validated');
+        document.getElementById('val_usertype').classList.add('was-validated');
+        document.getElementById('val_usersbu').classList.add('was-validated');
+        document.getElementById('val_dept').classList.add('was-validated');
+
+    }
+    else if((password_1 !== password_2))
+    {
+        alert("Password are not the same!");    
+    }
+    else
+    {
         $.ajax({
         type: 'POST',
         url: 'ajax.php',
@@ -1019,11 +1032,24 @@ function updateuserdetails(){
     var position = $('#update_pos').val();
     var department = $('#update_dept').val();
     
-    if((lastname == "")||(lastname == "")||(firstname == "")||(firstname == "")||(username == "")||(username == "")||(email == "")||(email == "")||(password_1 == "")||(password_1 == "")||(password_2 == "")||(password_2 == "")||(emp_sbu == "")||(emp_sbu == "")||(department == "")||(department == "")){
-        
-        alert("Please fill out the fields properly!");
-        
-    }else if((password_1 !== password_2)){
+    if((lastname == null)||(lastname == "")||
+    (firstname == null)||(firstname == "")||
+    (username == null)||(username == "")||
+    (email == null)||(email == "")||
+    (password_1 == null)||(password_1 == "")||
+    (password_2 == null)||(password_2 == "")||
+    (emp_sbu == null)||(emp_sbu == "")||
+    (department == null)||(department == ""))
+    {
+        document.getElementById('val_upd_username').classList.add('was-validated');
+        document.getElementById('val_upd_email').classList.add('was-validated');
+        document.getElementById('val_upd_pass1').classList.add('was-validated');
+        document.getElementById('val_upd_pass2').classList.add('was-validated');
+        document.getElementById('val_upd_sbu').classList.add('was-validated');
+        document.getElementById('val_upd_dept').classList.add('was-validated');   
+    }
+    else if((password_1 !== password_2))
+    {
         
         alert("Password are not the same!");
         

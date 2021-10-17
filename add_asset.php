@@ -49,12 +49,6 @@
                 <div class="invalid-feedback">This field is required!</div>
             </div>
           </div>
-            <div class="row mb-2 g-2">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="ispheripheral" id="type_of_asset" value="0"/>
-                    <label for="type_of_asset" class="form-label text-muted" >Please check the checkbox if the item is pheripheral</label>
-                </div>
-              </div>
           <div class="row g-2 mb-3">
             <div class="col">
               <label for="new_description" class="form-label">Description</label>
@@ -64,7 +58,7 @@
           <div class="row g-2 mb-3">
             <div class="col needs-validaton" id="val_sbu" novalidation>
               <label for="new_sbu" class="form-label">SBU</label>
-              <select id="new_sbu" class="form-select" required>
+              <select id="new_sbu" class="form-select" value="" required>
                 <option selected disabled value="">Choose...</option>
                 <option>AIC</option>
                 <option>EXERGY</option>
@@ -122,16 +116,7 @@
 <script>
 $(function(){
     asset_list();
-    selection_type_of_device()
+    selection_type_of_device();
 })
-    
-$(document).ready(function(){
-    $('#type_of_asset').change(function(){
-    if(this.checked)
-        $('#type_of_asset').val('1');
-   else
-        $('#type_of_asset').val('0');
-    });
-});
 
 </script>

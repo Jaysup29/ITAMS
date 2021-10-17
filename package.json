@@ -8,7 +8,8 @@
     "boxicons": "^2.0.9",
     "chart.js": "^3.5.1",
     "jquery": "^3.6.0",
-    "mdb-ui-kit": "^3.9.0"
+    "mdb-ui-kit": "^3.9.0",
+    "select2": "^4.1.0-rc.0"
   },
   "devDependencies": {},
   "scripts": {
