@@ -786,17 +786,17 @@ function return_lists(){
     
 function asset_log_details($assetid){    
     include 'dbcon.php';
-
-    $query = "SELECT a.id AS AssetID, r.id AS RecordID, CONCAT(r.emp_fname,' ',r.emp_lname) AS Employee, sbu.sbu_name, r.emp_position, r.location, r.date_created, ret.return_date, ret.note
-    FROM tbl_assets a
-    INNER JOIN tbl_records r ON a.id = r.asset_id
-    INNER JOIN tbl_return ret ON r.id = ret.record_id
-    INNER JOIN tbl_employees emp ON r.emp_id = emp.id
-    INNER JOIN tbl_sbu sbu ON emp.sbu_id = sbu.id
-    WHERE a.id = $assetid
-    GROUP BY r.id
-    ORDER BY r.date_created ASC";
-
+    
+    $query = "SELECT rec.id, emp.id AS Employee_ID, CONCAT(emp.first_name, ' ',emp.last_name), sbu.sbu_name, emp.position, rec.location, rec.date_created, ret.return_date, ret.note
+    FROM tbl_records rec
+    LEFT JOIN tbl_employees emp ON rec.emp_id = emp.id
+    LEFT JOIN tbl_assets ass ON rec.asset_id = ass.id
+    LEFT JOIN tbl_return ret ON rec.id = ret.record_id
+    LEFT JOIN tbl_sbu sbu ON emp.sbu_id = sbu.id
+    WHERE ass.id = $assetid
+    GROUP BY rec.id
+    ORDER BY rec.date_created";
+    
     $result = mysqli_query($conn, $query);
     $no = 1;
     while($row = mysqli_fetch_array($result)){

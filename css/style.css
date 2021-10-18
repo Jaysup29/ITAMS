@@ -204,3 +204,15 @@ footer{
     left: 5%;
     font-size: .7rem;
 }
+#spinner_pherip, #spinner_main{
+    position: relative;
+    align-content: center;
+    left: 10%;
+    top: -25%;
+}
+#spinner, #table_spinner{
+    position: relative;
+    align-content: center;
+    left: 50%;
+    top: 10%;
+}

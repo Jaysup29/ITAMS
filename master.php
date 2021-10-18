@@ -78,6 +78,7 @@
         include 'view_asset_log.php';
         include 'recover_users.php';
         include 'update_users_account.php';
+        include 'modal_loader.php';
 
     ?>
 

@@ -723,6 +723,7 @@ function sumOfMainDevices(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
+        async: false,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'MainDevices', selected_sbu:selected_sbu},
@@ -758,6 +759,7 @@ function sumOfPheripheralDevices(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
+        async: false,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'PheripheralDevices', selected_sbu:selected_sbu},
@@ -794,14 +796,23 @@ function dashboard_assets_status(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
+        async: false,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'dashboard_table_assets', selected_sbu:selected_sbu},
         dataType: 'text',
+        beforeSend: function()
+        {
+            $('#spinner').show();
+        },
         success: function(data){
 
             $('#table_assets').empty();
             $('#table_assets').append(data);
+        },
+        complete: function()
+        {
+            $('#spinner').hide();
         }
     });
 }
@@ -812,14 +823,23 @@ function dashboard_assets_status_pheripherals(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
+        async: false,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'dashboard_assetsstatus_pheripherals', selected_sbu:selected_sbu},
         dataType: 'text',
+        beforeSend: function()
+        {
+            $('#table_spinner').show();
+        },
         success: function(data){
             
             $('#table_assets_pheripherals').empty();
             $('#table_assets_pheripherals').append(data);
+        },
+        complete: function()
+        {
+            $('#table_spinner').hide();
         }
     });
 }
@@ -831,10 +851,15 @@ function mychartsAssets(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
-       type: 'POST',
+        async: false,
+        type: 'POST',
         url: 'ajax.php',
         data: { function: 'getdatatochart', selected_sbu:selected_sbu},
         dataType: 'json',
+        beforeSend: function()
+        {
+            $('#spinner_main').show();
+        },
         success: function(data){    
 
         var labels = data.map(function(e) {
@@ -868,6 +893,10 @@ function mychartsAssets(){
                 }
             });
             
+        },
+        complete: function()
+        {
+            $('#spinner_main').hide();
         }
     });
 }
@@ -875,10 +904,14 @@ function mychartsAssets(){
 function mychartsPheripherals(){
     
     $.ajax({
+        async: false,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'getdatatochartP'},
         dataType: 'json',
+        beforeSend: function(){
+            $('#spinner_pherip').show();  
+        },
         success: function(data){
             var labels = data.map(function(e) {
                return e.itemtype;
@@ -910,6 +943,10 @@ function mychartsPheripherals(){
                     }
                 }
             });
+        },
+        complete: function()
+        {
+            $('#spinner_pherip').hide(); 
         }
     });
 }
@@ -928,11 +965,7 @@ function userlist(){
             $('#users').empty();
             $('#users').append(data);
             
-        },
-        complete: function()
-            {
-                $("#spinner").hide();
-            }
+        }
     });  
 }
 

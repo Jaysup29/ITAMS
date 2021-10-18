@@ -1,6 +1,6 @@
 <?php
-//$conn = mysqli_connect("www.glaciercentraldata.com","glaciercdata_itams_admin","itams_admin","glaciercdata_itams");
-$conn = mysqli_connect("localhost","root","","itams");
+$conn = mysqli_connect("www.glaciercentraldata.com","glaciercdata_itams_admin","itams_admin","glaciercdata_itams");
+//$conn = mysqli_connect("localhost","root","","itams");
 
 if (mysqli_connect_errno()) 
 {

@@ -77,12 +77,18 @@
 
                     </tbody>
                 </table>
+                <div class="spinner-border text-primary" role="status" id="spinner">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-12">
             <div class="p-3 rounded shadow-sm bg-white h-100">
                 <div class="text-center pt-3">GRAPH ASSET STATUS INTERPRETATION</div>
                 <canvas id="myChartAssets"></canvas>
+                <div class="spinner-border text-primary" role="status" id="spinner_main">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
     </div>
@@ -146,20 +152,26 @@
                         </tr>
                     </thead>
                     <tbody id="table_assets_pheripherals">
-
+                        
                     </tbody>
                 </table>
+                <div class="spinner-border text-primary" role="status" id="table_spinner">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-12">
             <div class="p-3 rounded shadow-sm bg-white h-100">
                 <div class="text-center pt-3">GRAPH ASSET STATUS INTERPRETATION(Pheripherals)</div>
                 <canvas id="myChartPheripherals"></canvas>
+                  <div class="spinner-border text-primary" role="status" id="spinner_pherip">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
     </div>
-    
 </div>
+
 <script>
 $(function(){
 
