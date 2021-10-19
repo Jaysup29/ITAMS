@@ -7,6 +7,7 @@
             <div class="p-2 flex-grow-1 bd-highlight">
                 <div class="float-start d-grid d-md-block">
                 <button class="btn btn-primary" type="button" onclick="addasset()" id="addingasset">Add Asset</button>
+                    <button class="btn btn-primary" type="button" onclick="add_assign_record()" id="addingasset">Assign</button>
                 <a href="mass_upload.php"><button class="btn btn-primary" type="button">Upload</button></a>
             </div>
             </div>
@@ -35,33 +36,29 @@
             </div>
         </div>
     </div>
-    
-    <div class="row mx-3" >
-        <div class="col" >
-            <div class="rounded bg-white" style="height: 86vh; overflow: auto;">
-                <table class="table table-default border table-bordered table-hover table-scroll rounded" cellspacing="0" >
-                <thead class="shadow-sm" style="background-color: #6A89B7;">
-                    <tr>
-                    <th scope="col" class="text-start text-nowrap" style="width: 20px;">#</th>
-                    <th scope="col" class="fs-6 text-nowrap">Asset Tag</th>
-                    <th scope="col" class="fs-6 text-nowrap">Item Name</th>
-                    <th scope="col" class="fs-6 text-nowrap w-25">Description</th>
-                    <th scope="col" class="fs-6 text-nowrap">Serial No.</th>    
-                    <th scope="col" class="fs-6 text-nowrap">Price</th>
-                    <th scope="col" class="fs-6 text-nowrap">SBU</th>
-                    <th scope="col" class="fs-6 text-nowrap">Date Puchase</th>
-                    <th scope="col" class="fs-6 text-nowrap">OS Installed</th>
-                    <th scope="col" class="fs-6 text-nowrap">MS Office</th>
-                    <th scope="col" class="fs-6 text-nowrap">Remarks</th>
-                    <th scope="col" class="fs-6 text-nowrap">Type</th>
-                    <th scope="col" class="fs-6 text-nowrap">Status</th>
-                    <th scope="col" class="fs-6 text-nowrap">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="assetlist" class="border">
-               
-                </tbody>
+    <div class="row mx-3 rounded">
+        <div class="col-md-12 p-0 bg-white">
+            <div class="table-wrap">
+                <table class="table table-striped m-0">
+                    <thead style="background-color: #6A89B7;">
+                        <tr>
+                            <th>#</th>
+                            <th>SBU</th>
+                            <th>Asset tag</th>
+                            <th>Name/Brand</th>
+                            <th>Item description</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Remarks</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                     </thead>
+                     <tbody id="assetlist">
+                     </tbody>
                 </table>
+                <div class="spinner-border text-primary" role="status" id="asset_spinner">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
     </div>

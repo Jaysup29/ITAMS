@@ -109,19 +109,24 @@ function asset_list() {
     var filter_sbu = $('#filter_sbu').val();
     
     $.ajax({
+        async: true,
         url: 'ajax.php',
         type: 'POST',
         data: { function: 'asset_lists', filter_sbu:filter_sbu},
         dataType: 'text',
-        success: function (data) {
-
-            $('#assetlist').empty();
-            $('#assetlist').append(data);
+        beforeSend: function()
+        {
+            $("#asset_spinner").show();
         },
         complete: function()
-            {
-                $("#spinner").hide();
-            }
+        {
+            $("#asset_spinner").hide();
+        },
+        success: function (data) {
+            console.log(data);
+            $('#assetlist').empty();
+            $('#assetlist').append(data);
+        }
     });
 }
 
@@ -361,15 +366,19 @@ function record_list() {
         type: 'POST',
         data: { function: 'record_lists' },
         dataType: 'text',
+        beforeSend: function()
+        {
+            $("#spinner").show();
+        },
+        complete: function()
+        {
+            $("#spinner").hide();
+        },
         success: function (data) {
 
             $('#recordlist').empty();
             $('#recordlist').append(data);
         },
-        complete: function()
-            {
-                $("#spinner").hide();
-            }
     });
 }
 
@@ -723,7 +732,7 @@ function sumOfMainDevices(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
-        async: false,
+        async: true,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'MainDevices', selected_sbu:selected_sbu},
@@ -759,7 +768,7 @@ function sumOfPheripheralDevices(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
-        async: false,
+        async: true,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'PheripheralDevices', selected_sbu:selected_sbu},
@@ -796,7 +805,7 @@ function dashboard_assets_status(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
-        async: false,
+        async: true,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'dashboard_table_assets', selected_sbu:selected_sbu},
@@ -823,7 +832,7 @@ function dashboard_assets_status_pheripherals(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
-        async: false,
+        async: true,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'dashboard_assetsstatus_pheripherals', selected_sbu:selected_sbu},
@@ -851,7 +860,7 @@ function mychartsAssets(){
     var selected_sbu = $("#select_sbu").val();
     
     $.ajax({
-        async: false,
+        async: true,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'getdatatochart', selected_sbu:selected_sbu},
@@ -904,7 +913,7 @@ function mychartsAssets(){
 function mychartsPheripherals(){
     
     $.ajax({
-        async: false,
+        async: true,
         type: 'POST',
         url: 'ajax.php',
         data: { function: 'getdatatochartP'},

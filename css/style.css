@@ -170,13 +170,11 @@
   }
 }
 
-.table-default>tbody>tr:nth-of-type(even){
-    background-color: #cee3fd;
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --mdb-table-accent-bg: #fff !important;
 }
-
-
-.table>:not(caption)>*>* {
-  padding: .6rem .6rem !important;
+.table-striped>tbody>tr:nth-of-type(even) {
+    --mdb-table-accent-bg: #BBD3FB !important;
 }
 
 

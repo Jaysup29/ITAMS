@@ -22,34 +22,31 @@
             </div>
         </div>
     </div>
-    <div class="row mx-3">
-        <div class="col">
-            <div class="rounded bg-white" style="overflow: auto;">
-                <table class="table table-default border table-bordered table-hover table-scroll rounded" cellspacing="0" >
-                <thead class="shadow-sm sticky-top" style="background-color: #6A89B7;">
-                    <tr>
-                    <th scope="col" class="fs-6 text-nowrap" style="width: 20px;">#</th>
-                    <th scope="col" class="fs-6 text-nowrap">Asset Tag</th>
-                    <th scope="col" class="fs-6 text-nowrap">Name/Brand</th>
-                    <th scope="col" class="fs-6 text-nowrap">Type of Device</th>
-                    <th scope="col" class="fs-6 text-nowrap">Serial No.</th>
-                    <th scope="col" class="fs-6 text-nowrap w-25">Descriptions</th>
-                    <th scope="col" class="fs-6 text-nowrap">Employee name</th>
-                    <th scope="col" class="fs-6 text-nowrap">SBU</th>
-                    <th scope="col" class="fs-6 text-nowrap">Position</th>
-                    <th scope="col" class="fs-6 text-nowrap">Location</th>
-                    <th scope="col" class="fs-6 text-nowrap">Date Issued</th>
-                    <th scope="col" class="fs-6 text-nowrap">Status</th>
-                    <th scope="col" class="fs-6 text-nowrap">Remarks</th>
-                    <th scope="col" class="fs-6 text-nowrap">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="recordlist" class="border">
-               
-                </tbody>
+    <div class="row mx-3 rounded">
+        <div class="col-md-12 p-0 bg-white">
+            <div class="table-wrap">
+                <table class="table table-striped m-0">
+                    <thead style="background-color: #6A89B7;">
+                        <tr>
+                            <th>#</th>
+                            <th>Borrower</th>
+                            <th>SBU</th>
+                            <th>Position</th>
+                            <th>Asset tag</th>
+                            <th>Name/Brand</th>
+                            <th>Type of Device</th>
+                            <th>Status</th>
+                            <th>Remarks</th>
+                            <th>Date Issued</th>
+                            <th>Location</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                     </thead>
+                     <tbody id="recordlist" class="border">
+                    </tbody>
                 </table>
-                <div class="spinner-border text-primary" role="status" id="spinner" style="position: absolute; top: 50%; left: 50%;">
-                  <span class="visually-hidden">Loading...</span>
+                <div class="spinner-border text-primary" role="status" id="asset_spinner">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
         </div>

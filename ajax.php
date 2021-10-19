@@ -327,67 +327,120 @@ function type_of_device(){
 function asset_lists($filter_SBU){
     include 'dbcon.php';
         
-    $query = "SELECT ass.id, ass.asset_tag, ass.asset_name, ass.descriptions, ass.serial_no, ass.price, ass.sbu, ass.date_purchase, ass.installed_os, ass.ms_office, ass.remarks, item.itemname, ass.`status`
-        FROM tbl_assets ass
-        INNER JOIN tbl_item item ON ass.type_of = item.id
-        ";
+//    $query = "SELECT ass.id, ass.asset_tag, ass.asset_name, ass.descriptions, ass.serial_no, ass.price, ass.sbu, ass.date_purchase, ass.installed_os, ass.ms_office, ass.remarks, item.itemname, ass.`status`
+//        FROM tbl_assets ass
+//        INNER JOIN tbl_item item ON ass.type_of = item.id
+//        ";
+//        
+//    if(($filter_SBU == null)||($filter_SBU == "")||($filter_SBU == 'ALL'))
+//    {
+//            
+//    }
+//    else if($filter_SBU == 'PNKC')
+//    {
+//        $query .="WHERE ass.sbu = 'PNKC'";
+//    }
+//    else if($filter_SBU == 'GILI')
+//    {
+//        $query .="WHERE ass.sbu = 'GILI'";   
+//    }
+//    else if($filter_SBU == 'EXERGY')
+//    {
+//        $query .="WHERE ass.sbu = 'EXERGY'";
+//    }
+//    else if($filter_SBU == 'MANNVITS')
+//    {
+//        $query .="WHERE ass.sbu = 'MANNVITS'";
+//    }
+//    else if($filter_SBU == 'CLDI')
+//    {
+//        $query .="WHERE ass.sbu = 'CLDI'";
+//    }
+//    else if($filter_SBU == 'AIC')
+//    {
+//        $query .="WHERE ass.sbu = 'AIC'";
+//    }
+//    else if($filter_SBU == 'SUKIKO')
+//    {
+//        $query .="WHERE ass.sbu = 'SUKIKO'";
+//    }
+//    $result = mysqli_query($conn, $query);
+//    $no = 1;
+//    while($row = mysqli_fetch_array($result)){
+//        echo '<tr id="tr-table">
+//                <th class="text-end">'.$no.'</th>
+//                <td>'.$row[1].'</td>
+//                <td>'.$row[2].'</td>
+//                <td>'.$row[3].'</td>
+//                <td>'.$row[4].'</td>
+//                <td>'.number_format($row[5]).'</td>
+//                <td>'.$row[6].'</td>
+//                <td>'.date("M d, Y", strtotime($row[7])).'</td>
+//                <td>'.$row[8].'</td>
+//                <td>'.$row[9].'</td>
+//                <td>'.$row[10].'</td>
+//                <td>'.$row[11].'</td>
+//                <td>'.$row[12].'</td>
+//                <td><div class="btn-group" role="group" aria-label="Basic mixed styles example">
+//                      <button class="btn btn-primary btn-sm" type="button" onclick="assignasset_loader('.$row[0].')">Assign</button>
+//                      <button class="btn btn-warning btn-sm" type="button" onclick="view_asset('.$row[0].')">Update</button>
+//                      <button class="btn btn-danger btn-sm" type="button" onclick="assetlogs('.$row[0].')">Logs</button></div>
+//                </td>
+//            </tr>';
+//        $no++;
+//    }
+    $query = "SELECT ass.id, ass.sbu, ass.asset_tag, ass.asset_name, ass.descriptions, item.itemname, ass.`status`, ass.remarks
+    FROM tbl_assets ass
+    INNER JOIN tbl_item item ON ass.type_of = item.id
+    ";
         
     if(($filter_SBU == null)||($filter_SBU == "")||($filter_SBU == 'ALL'))
     {
-            
+        $query .="ORDER BY ass.id ASC";
     }
     else if($filter_SBU == 'PNKC')
     {
-        $query .="WHERE ass.sbu = 'PNKC'";
+        $query .="WHERE ass.sbu = 'PNKC' ORDER BY ass.id ASC";
     }
     else if($filter_SBU == 'GILI')
     {
-        $query .="WHERE ass.sbu = 'GILI'";   
+        $query .="WHERE ass.sbu = 'GILI' ORDER BY ass.id ASC";   
     }
     else if($filter_SBU == 'EXERGY')
     {
-        $query .="WHERE ass.sbu = 'EXERGY'";
+        $query .="WHERE ass.sbu = 'EXERGY' ORDER BY ass.id ASC";
     }
     else if($filter_SBU == 'MANNVITS')
     {
-        $query .="WHERE ass.sbu = 'MANNVITS'";
+        $query .="WHERE ass.sbu = 'MANNVITS' ORDER BY ass.id ASC";
     }
     else if($filter_SBU == 'CLDI')
     {
-        $query .="WHERE ass.sbu = 'CLDI'";
+        $query .="WHERE ass.sbu = 'CLDI' ORDER BY ass.id ASC";
     }
     else if($filter_SBU == 'AIC')
     {
-        $query .="WHERE ass.sbu = 'AIC'";
+        $query .="WHERE ass.sbu = 'AIC' ORDER BY ass.id ASC";
     }
     else if($filter_SBU == 'SUKIKO')
     {
-        $query .="WHERE ass.sbu = 'SUKIKO'";
+        $query .="WHERE ass.sbu = 'SUKIKO' ORDER BY ass.id ASC";
     }
     $result = mysqli_query($conn, $query);
-    $no = 1;
-    while($row = mysqli_fetch_array($result)){
-        echo '<tr id="tr-table">
-                <th class="text-end">'.$no.'</th>
-                <td>'.$row[1].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.number_format($row[5]).'</td>
-                <td>'.$row[6].'</td>
-                <td>'.date("M d, Y", strtotime($row[7])).'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[10].'</td>
-                <td>'.$row[11].'</td>
-                <td>'.$row[12].'</td>
-                <td><div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                      <button class="btn btn-primary btn-sm" type="button" onclick="assignasset_loader('.$row[0].')">Assign</button>
-                      <button class="btn btn-warning btn-sm" type="button" onclick="view_asset('.$row[0].')">Update</button>
-                      <button class="btn btn-danger btn-sm" type="button" onclick="assetlogs('.$row[0].')">Logs</button></div>
-                </td>
-            </tr>';
-        $no++;
+    while($row = mysqli_fetch_array($result))
+    {
+        echo '<tr class="">
+				<th scope="row">'.$row[0].'</th>
+				<td>'.$row[1].'</td>
+				<td class="text-nowrap">'.$row[2].'</td>
+				<td>'.$row[3].'</td>
+				<td>'.$row[4].'</td>
+				<td>'.$row[5].'</td>
+				<td>'.$row[6].'</td>
+				<td>'.$row[7].'</td>
+				<td class="text-center"><div class="btn-group shadow-0" role="group" aria-label="Basic example"> <button class="btn p-0 m-0 shadow-0 mx-2" type="button" onclick="assetlogs('.$row[0].')"><i class="bx bx-list-check bx-sm p-0"></i></button>
+                <button class="btn p-0 m-0 shadow-0" type="button" onclick="view_asset('.$row[0].')"><i class="bx bx-link-external bx-sm p-0" ></i></button></div></td>
+		</tr>';
     }
     // closing connection
     mysqli_close($conn);
@@ -564,7 +617,7 @@ function submit_assign($assign_id, $assign_asset_tag, $assign_asset_name, $assig
 function record_lists(){
     include 'dbcon.php';
         
-    $query = "SELECT rec.id, ass.id, ass.asset_tag, ass.asset_name, item.itemname, ass.serial_no, ass.descriptions, CONCAT(emp.first_name,' ',emp.last_name), sbu.sbu_name, emp.position, rec.location, rec.date_created, ass.`status`, rec.asset_remarks
+    $query = "SELECT rec.id, ass.id, emp.id, CONCAT(emp.first_name,' ',emp.last_name), sbu.sbu_name, emp.position, ass.asset_tag, ass.asset_name, item.itemname, ass.`status`, rec.asset_remarks, rec.location, rec.date_created
     FROM tbl_records rec
     INNER JOIN tbl_assets ass ON rec.asset_id = ass.id
     INNER JOIN tbl_item item ON ass.type_of = item.id
@@ -578,8 +631,7 @@ function record_lists(){
     while($row = mysqli_fetch_array($result))
     {
         echo '<tr>  
-                <th class="text-end">'.$no.'</th>
-                <td>'.$row[2].'</td>
+                <th scope="row">'.$no.'</th>
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
@@ -588,13 +640,13 @@ function record_lists(){
                 <td>'.$row[8].'</td>
                 <td>'.$row[9].'</td>
                 <td>'.$row[10].'</td>
+                <td>'.$row[11].'</td>
                 <td>'.date("M d, Y", strtotime($row[11])).'</td>
-                <td>'.$row[12].'</td>
-                <td>'.$row[13].'</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                      <button class="btn btn-warning btn-sm" type="button" onclick="view_record_detail('.$row[0].')">Update</button>
-                      <button class="btn btn-danger btn-sm" type="button" onclick="return_asset_confirmation('.$row[0].')">Return</button></td>
+                <td class="d-flex justify-content-center">
+                    <div class="btn-group shadow-0" role="group" aria-label="Basic mixed styles example">
+                      <button class="btn p-0 m-0 shadow-0" type="button" onclick="return_asset_confirmation('.$row[0].')"><i class="bx bx-share bx-sm p-0"></i></button>
+                      <button class="btn p-0 m-0 shadow-0 mx-2" type="button" onclick="view_record_detail('.$row[0].')"><i class="bx bx-link-external bx-sm p-0" ></i></button>
+                    </td>
                     </div>  
             </tr>';     
         $no++;
